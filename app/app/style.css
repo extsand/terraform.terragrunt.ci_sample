@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Display:wght@400;800&display=swap');
+
+
+/*Zero style*/
+/*more https://elad.medium.com/how-does-css-work-92fe7116916d*/
+* {
+	all: unset; 
+	display: revert;
+ }
+ 
+ *, *::before, *::after{ 
+		box-sizing: border-box;
+ }
+
+ /* */
+*{padding: 0;margin: 0;border: 0;}
+*,*:before,*:after{-moz-box-sizing: border-box;-webkit-box-sizing: border-box;box-sizing: border-box;}
+:focus,:active{outline: none;}
+a:focus,a:active{outline: none;}
+nav,footer,header,aside{display: block;}
+html,body{height:100%;width:100%;font-size:100%;line-height:1;font-size:10px; -ms-text-size-adjust:100%;-moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
+input,button,textarea{font-family:inherit;}
+input::-ms-clear{display: none;}
+button{cursor: pointer;}
+button::-moz-focus-inner {padding:0;border:0;}
+a,a:visited{text-decoration: none;}
+a:hover{text-decoration: none;}
+ul li{list-style: none;}
+img{vertical-align: top;}
+h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
+
+
+/*Zero style END*/
+
+html, body {
+	width: 100%;
+	height: 100%;
+	background-color: #2496ED;
+	overflow: hidden;
+	font-size: 10px;
+	font-family: 'Noto Sans Display', sans-serif;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.img {
+	max-width: 20rem;
+	
+}
+.img img{
+	width: 100%;
+	height: auto;
+}
+.title {
+	font-size: 9rem;
+	font-weight: 800;
+	color: #fff
+}
+@media screen and (max-width: 750px) {	
+	.title {
+		font-size: 6rem;
+	}
+}
+
+.p-text {
+	margin: 3rem 0;
+	display: block;
+	text-align: center;
+	max-width: 45rem;
+	color: #fff;
+	font-size: 1.8rem;
+	letter-spacing: 1px;
+	line-height: 2.3rem;
+}
+
+
+.link {
+	margin: 2rem;
+
+	font-size: 2.4rem;
+	text-decoration: none;
+	color: #fff;
+
+	padding: 1.1rem 2rem;
+	border-radius: 1rem;
+	border: 2px solid #fff;
+	transition: all 0.4s ease-in-out;
+	cursor: pointer;
+}
+
+.link:hover{
+	/* translate: all 1.4s ease-in; */
+	color:#2496ED;
+	background-color: #fff;
+}
+
+
+
+
