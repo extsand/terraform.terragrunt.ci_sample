@@ -2,6 +2,10 @@
 
 .tfstate
 .tfvars
+.terragrunt-cache/
+.terragrunt-cache
+
+.secrets
 
 
 

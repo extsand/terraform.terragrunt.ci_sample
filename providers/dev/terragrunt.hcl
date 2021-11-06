@@ -17,6 +17,7 @@ locals {
 	app_count = 1
 	image_tag = "0.1"
 	build_app_command = "make build-app"
+	# app_working_dir = "../../some_homies"
 
   #repo settings
 	repo_url = "https://git......."
@@ -38,7 +39,8 @@ inputs = {
 	app_name = local.app_name
 	app_count = local.app_count
 	image_tag = local.image_tag
-	build_command = local.build_app_command
+	build_app_command = local.build_app_command
+	# app_working_dir = local.app_working_dir
 
 	app_name = local.app_name
 	app_count = local.app_count
@@ -105,5 +107,5 @@ terraform {
 # terragrunt v0.35.4
 
 #Set version for terraform and terragrunt
-terraform_version_constraint = "1.0.4"
+terraform_version_constraint = ">=1.0.4"
 terragrunt_version_constraint = ">= 0.35.4"

@@ -8,7 +8,7 @@ include {
 
 # for number of runnings
 dependencies {
-	paths = ["../first_build"]
+	paths = ["../local_build_init"]
 }
 
 dependency "aws_ecr"{

@@ -1,3 +1,8 @@
+provider "aws" {
+  profile = var.aws_profile
+  region = var.aws_region
+}
+
 #create container application 
 #with null_resource
 
@@ -16,4 +21,8 @@ resource "null_resource" "build_app" {
 			ENV_NAME = var.env
 		}
 	}
+}
+
+output "app-build-status" {
+  value = "Application Build was success"
 }

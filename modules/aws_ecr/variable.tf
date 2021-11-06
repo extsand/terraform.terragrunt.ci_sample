@@ -13,6 +13,6 @@ variable "environment" {
 }
 variable "aws_profile" {
 	type = string
-  description = "aws profile"
+  	description = "aws profile"
 	default = "default"
 }

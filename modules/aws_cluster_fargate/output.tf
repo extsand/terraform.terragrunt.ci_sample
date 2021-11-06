@@ -1,12 +1,3 @@
-output "application_load_balancer_hostname" {
-	value = aws_alb.app_load_balancer.dns_name
-}
-output "application_load_balancer_arn" {
-	value = aws_alb.app_load_balancer.arn
-}
-
-
-
 
 output "vpc_id" {
 	value = aws_vpc.vpc_cluster.id
@@ -22,4 +13,15 @@ output "app-private-subnet" {
 }
 output "app-public-subnet" {
 	value = aws_subnet.public.*.cidr_block
+}
+
+
+
+output "application_load_balancer_arn" {
+	value = aws_alb.app_load_balancer.arn
+}
+
+
+output "application_load_balancer_hostname" {
+	value = aws_alb.app_load_balancer.dns_name
 }

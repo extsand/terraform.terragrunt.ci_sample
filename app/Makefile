@@ -36,7 +36,7 @@ build-app:
 	$(MAKE) aws-ecr-login
 
 	echo "Build task started"
-	docker build -t $(APP_IMAGE) -f ./Dockerfile .
+	docker build -t $(APP_IMAGE) -f ./app/Dockerfile .
 	docker push $(APP_IMAGE)
 	echo "------ All task is done -------"
 
@@ -49,4 +49,4 @@ aws-ecr-login:
 
 .PHONY:debug-mode
 debug-mode:
-	echo "Debug mode ON =============>"
+	echo "Debug mode ON ============= YOU WILL CHANGE MAKE TASK! "

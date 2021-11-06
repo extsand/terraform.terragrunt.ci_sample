@@ -5,7 +5,7 @@ variable "aws_region" {
 }
 variable "aws_profile" {
 	type = string
-  description = "aws profile"
+  	description = "aws profile"
 	default = "default"
 }
 
@@ -26,7 +26,7 @@ variable "env" {
 
 variable "working_dir" {
     type = string
-		default = "../../app/"
+	# default = "../../app"
 }
 
 
