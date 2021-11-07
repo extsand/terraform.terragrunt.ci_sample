@@ -18,7 +18,7 @@ resource "null_resource" "build_app" {
 
 			APP_NAME = var.app_name
 			APP_TAG = var.app_tag
-			ENV_NAME = var.env
+			ENV_NAME = var.environment
 		}
 	}
 }

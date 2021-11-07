@@ -1,12 +1,17 @@
 # for fix error with terragrunt cache 
 # add new env var to OS
 # export TERRAGRUNT_DOWNLOAD=C:\.terragrunt-cache
+# all variables set like TF_VAR_variable="myfirstvar"
+# TF_VAR_instance_type="t2.micro" \
+# TF_VAR_instance_count=10 \
+# TF_VAR_tags='{"Name":"example-app"}' \
 
 locals {
 	#aws account
 	aws_profile = "default"
 	aws_account = "530117518858"
 	aws_region = "eu-central-1"
+	aws_az_count = "2"
 	
 	#aws bucket
 	remote_state_bucket_prefix = "terraform"
@@ -14,16 +19,29 @@ locals {
 	
 	#app settings
 	app_name = "golden-app"
+	app_port = "80"
 	app_count = 1
 	image_tag = "0.1"
 	build_app_command = "make build-app"
 	# app_working_dir = "../../some_homies"
 
-  #repo settings
+  	#repo settings
 	repo_url = "https://git......."
 	repo_branch = "dev"
 	branch_pattern = "^refs/heads/${local.repo_branch}$"
 	git_trigger_event = "PUSH"
+
+
+	#project tags
+	project_tags = {
+		"project" = "DevOps Academy Example"
+		"owner" = "Molly"
+	}
+
+	#fargate settings
+	fargate_cpu = "512"
+	fargate_memory = "1024"
+
 }
 
 # Indicate the input values to use for the variables of the module.
@@ -35,21 +53,26 @@ inputs = {
 	aws_profile = local.aws_profile
 	aws_account = local.aws_account
 	aws_region = local.aws_region
+	aws_az_count = local.aws_az_count
 
 	app_name = local.app_name
+	app_port = local.app_port
 	app_count = local.app_count
-	image_tag = local.image_tag
+	app_tag = local.image_tag
 	build_app_command = local.build_app_command
 	# app_working_dir = local.app_working_dir
 
-	app_name = local.app_name
-	app_count = local.app_count
-	image_tag = local.image_tag
 
 	repo_url = local.repo_url
 	repo_branch = local.repo_branch
 	branch_pattern = local.branch_pattern
 	git_trigger_event = local.git_trigger_event
+
+
+	project_tags = local.project_tags
+
+	fargate_cpu = local.fargate_cpu
+	fargate_memory = local.fargate_memory
 
 }
 

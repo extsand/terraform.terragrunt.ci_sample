@@ -11,15 +11,11 @@ dependency "aws_ecr"{
 	skip_outputs = true
 }
 
-# dependency "fixme"{
-# 	config_path = "../dev"
-# 	mock_outputs = {
-# 		build_app_command = "00000000"
-# 	}
-# }
+
+
 
 inputs = {
+	#TF_VAR_sfsdffs="name_of_folder"
 	working_dir = format("%s/../../../app", get_terragrunt_dir())
-	# build_app_command  = dependency.dev.outputs.build_app_command
 }
 

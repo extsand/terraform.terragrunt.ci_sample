@@ -1,6 +1,6 @@
 provider "aws" {
 	region = var.aws_region
-	profile = var.profile
+	profile = var.aws_profile
 }
 
 
@@ -65,15 +65,17 @@ data "template_file" "app_template" {
   template = file(var.task_definition_template)
 
   vars = {
+	aws_region     = var.aws_region
+    env            = var.environment
+	
+	app_name       = var.app_name
     app_image      = var.ecr_repository_url
     app_port       = var.app_port
-    fargate_cpu    = var.fargate_cpu
+    image_tag      = var.app_tag
+    
+	fargate_cpu    = var.fargate_cpu
     fargate_memory = var.fargate_memory
-    aws_region     = var.aws_region
-    env            = var.environment
-    app_name       = var.app_name
-		image_repo 		 = var.ecr_repository_url
-    image_tag      = var.image_tag
+    
   }
 	
 }

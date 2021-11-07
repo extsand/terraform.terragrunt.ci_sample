@@ -1,26 +1,26 @@
 
 variable "aws_region" {
 	type = string
-	default = "eu-central-1"
+	# default = "eu-central-1"
 }
 variable "aws_profile" {
 	type = string
   	description = "aws profile"
-	default = "default"
+	# default = "default"
 }
 
 
 variable "app_name" {
     type = string
-		default = "best_app_ever_you_see"
+	# default = "best_app_ever_you_see"
 }
 variable "app_tag" {
     type = string
-		default = "init"
+	# default = "init"
 }
-variable "env" {
+variable "environment" {
     type = string
-		default = "dev"
+	# default = "dev"
 }
 
 
@@ -32,7 +32,7 @@ variable "working_dir" {
 
 variable "build_app_command" {
 	type = string
-	default = "make debug-mode"
+	# default = "make debug-mode"
 }
 
 
