@@ -18,12 +18,12 @@ locals {
 	env = "dev"	
 	
 	#app settings
-	app_name = "golden-app"
+	app_name = "academy-app"
 	app_port = "80"
-	app_count = 1
+	app_count = 2
 	image_tag = "init"
-	build_app_command = "make build-app"
-	# app_working_dir = "../../some_homies"
+	build_app_command = "make build-app APP_NAME=${local.app_name} ENV_NAME=${local.env} APP_TAG=${local.image_tag}"
+	
 
   	#repo settings
 	repo_url = "https://git......."
@@ -35,7 +35,7 @@ locals {
 	#project tags
 	project_tags = {
 		"project" = "DevOps Academy Example"
-		"owner" = "Molly"
+		"owner" = "extsand"
 	}
 
 	#fargate settings

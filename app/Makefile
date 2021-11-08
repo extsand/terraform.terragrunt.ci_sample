@@ -10,9 +10,9 @@
 ## make build-app APP_NAME=example
 
 #app variables
-APP_NAME ?= blue-app
+APP_NAME ?= academy-app
 ENV_NAME ?= dev
-APP_TAG ?= latest
+APP_TAG ?= init
 APP_IMAGE = $(AWS_REPOSITORY_NAME):$(APP_TAG)
 
 #aws variables
