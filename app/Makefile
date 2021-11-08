@@ -32,14 +32,15 @@ AWS_REPOSITORY_NAME = $(AWS_REGISTRY_ID).dkr.ecr.$(AWS_REPOSITORY_REGION).amazon
 # - push docker image to aws elastic container registry
 .PHONY:build-app
 build-app:
-	# echo "Login aws ecr"
-	# $(MAKE) aws-ecr-login
+	echo "Login aws ecr"
+	$(MAKE) aws-ecr-login
 
 	echo "Build task started"
 	# docker build -t $(APP_IMAGE) -f ./app/Dockerfile .
 	# docker build -t $(APP_IMAGE) -f ./app/Dockerfile
+	
 	docker build -t $(APP_IMAGE) ./app/.
-	# docker push $(APP_IMAGE)
+	docker push $(APP_IMAGE)
 	echo "------ All task is done -------"
 
 #Task name: aws-ecr-login 

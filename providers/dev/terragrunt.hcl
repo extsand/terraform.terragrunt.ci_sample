@@ -8,7 +8,7 @@
 
 locals {
 	#aws account
-	aws_profile = "default"
+	aws_profile = "academy"
 	aws_account = "530117518858"
 	aws_region = "eu-central-1"
 	aws_az_count = "2"
@@ -21,7 +21,7 @@ locals {
 	app_name = "golden-app"
 	app_port = "80"
 	app_count = 1
-	image_tag = "0.1"
+	image_tag = "init"
 	build_app_command = "make build-app"
 	# app_working_dir = "../../some_homies"
 
