@@ -1,10 +1,15 @@
 #custom 
+*.tfstate
+*.tfvars
+*.terragrunt-cache/
+*.terragrunt-cache
+*.secrets
+
 
 .tfstate
 .tfvars
 .terragrunt-cache/
 .terragrunt-cache
-
 .secrets
 
 
