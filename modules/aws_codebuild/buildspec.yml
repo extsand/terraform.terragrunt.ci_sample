@@ -1,0 +1,42 @@
+version: 0.2
+
+env:
+  variables:
+    NAME: "Golden stone"
+    ENV: "developer-mode"
+    VERSION: "${CODEBUILD_RESOLVED_SOURCE_VERSION}"
+    DIR: "${CODEBUILD_SRC_DIR}"
+
+phases:
+  # pre_build:
+  #   commands:
+  #   # some...
+  #   - echo "We prepare to work"
+  #   - echo "version is - ${VERSION}"
+  #   - echo "workdir is - ${DIR}"
+  #   - echo ${CODEBUILD_SRC_DIR}
+  #   - echo ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+  #   - echo "go to next step"
+  #   finally: echo "I'm always run. Even if jobs was falls "
+
+  # install:
+  #   commands:
+  #   # some....
+  #   - echo "Install environment"
+  #   - echo "go to next step"
+
+  build:
+    commands:
+
+    - echo 'Codebuild was created by Terraform___)))'
+    # some....
+    # - echo Build with git hooks
+    # - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+    # - echo "Build application"
+    # - echo "go to next step"
+
+  # post_build:
+  #   commands:
+  #   # some...
+  #   - echo "Send info messages"
+  #   - echo "finish"
