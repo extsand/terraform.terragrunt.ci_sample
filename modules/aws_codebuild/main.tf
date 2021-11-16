@@ -62,6 +62,7 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
 		type = "GITHUB"
 		location = "https://github.com/extsand/blue_app"
 		git_clone_depth = 1
+		report_build_status = true
 		git_submodules_config {
 			fetch_submodules = true
 		}
