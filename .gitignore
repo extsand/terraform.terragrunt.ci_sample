@@ -5,6 +5,8 @@
 *.terragrunt-cache
 *.secrets
 
+.terraform
+.terraform.lock.hcl
 
 .tfstate
 .tfvars
