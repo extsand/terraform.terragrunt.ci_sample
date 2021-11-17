@@ -1,6 +1,4 @@
-variable git_token{
-    type = string
-}
+variable git_token{}
 
 provider "aws" {
 	profile = "default"
@@ -10,17 +8,6 @@ provider "aws" {
 resource "aws_s3_bucket" "codebuild_bucket" {
 	bucket = "for-codebuild"
 	acl = "private"
-}
-
-resource "aws_iam_role" "codebuild-role" {
-	name = "role-for-codebuild"
-	assume_role_policy = data.template_file.template-codebuild-role.rendered	
-}
-
-resource "aws_iam_role_policy" "codebuild-role-policy" {
-	name = "policy-for-role-codebuild"
-	role = aws_iam_role.codebuild-role.name
-	policy = data.template_file.template-codebuild-role-policy.rendered
 }
 
 resource "null_resource" "import_credentials" {
@@ -55,7 +42,7 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
 	}
 	environment {
 		compute_type = "BUILD_GENERAL1_SMALL"
-		image = "aws/codebuild/standard:4.0"
+		image = "aws/codebuild/standard:5.0"
 		type = "LINUX_CONTAINER"
 		image_pull_credentials_type = "CODEBUILD"
 		privileged_mode = true

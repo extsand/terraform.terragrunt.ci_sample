@@ -1,6 +1,7 @@
 resource "aws_security_group" "security_for_codebuild" {
   name        = "Security for Codebuild"
   vpc_id      = aws_vpc.codebuild_vpc.id
+  # vpc_id = aws_vpc.codebuild_vpc.id
 
   ingress {
     from_port   = 0
