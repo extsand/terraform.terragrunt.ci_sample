@@ -19,7 +19,24 @@ resource "aws_iam_role_policy" "codebuild-role-policy" {
 	policy = data.template_file.template-codebuild-role-policy.rendered
 }
 
+resource "null_resource" "import_credentials" {
+	triggers = {
+		github_oauth_tocken = "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"
+	}
+	provisioner "local-exec" {
+		command = <<EOF
+		 aws --region eu-central-1 codebuild import-source-credentials \
+                                                             --token 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 \
+                                                             --server-type GITHUB \
+                                                             --auth-type PERSONAL_ACCESS_TOKEN
+EOF
+	}
+}
+
 resource "aws_codebuild_project" "best-codebuild-ever" {
+	depends_on = [
+		null_resource.import_credentials
+	]
 	name = "golden-paper"
 	description = "bla bla bla again"
 	build_timeout = "10"

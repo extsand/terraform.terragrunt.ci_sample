@@ -9,6 +9,9 @@
 .terraform.lock.hcl
 terraform.tfstate.backup
 *.backup
+./modules/aws_codebuild/terraform.tfstate.backup
+.backup
+
 .tfstate
 .tfvars
 .terragrunt-cache/
