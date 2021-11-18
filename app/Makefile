@@ -15,7 +15,7 @@ ENV_NAME ?= dev
 APP_TAG ?= init
 APP_IMAGE = $(AWS_REPOSITORY_NAME):$(APP_TAG)
 
-#aws variables
+#aws variables 
 AWS_REGISTRY_ID ?= 530117518858
 AWS_REPOSITORY_REGION ?= eu-central-1
 AWS_PROFILE ?= academy
@@ -36,8 +36,6 @@ build-app:
 	$(MAKE) aws-ecr-login
 
 	echo "Build task started"
-	# docker build -t $(APP_IMAGE) -f ./app/Dockerfile .
-	# docker build -t $(APP_IMAGE) -f ./app/Dockerfile
 	
 	docker build -t $(APP_IMAGE) ./app/.
 	docker push $(APP_IMAGE)
@@ -52,4 +50,4 @@ aws-ecr-login:
 
 .PHONY:debug-mode
 debug-mode:
-	echo "Debug mode ON ============= YOU WILL CHANGE MAKE TASK! "
+	echo "Debug mode ON ============= YOU WILL CHANGE MAKE TASK!"

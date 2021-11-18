@@ -10,25 +10,36 @@ resource "aws_s3_bucket" "codebuild_bucket" {
 	acl = "private"
 }
 
-resource "null_resource" "import_credentials" {
-	triggers = {
-		github_oauth_token = var.git_token
-	}
-	provisioner "local-exec" {
-		command = <<EOF
-		 aws --region eu-central-1 codebuild import-source-credentials \
-                                                             --token ${var.git_token} \
-                                                             --server-type GITHUB \
-                                                             --auth-type PERSONAL_ACCESS_TOKEN
-EOF
-	}
+# # ======== Manual version
+# resource "null_resource" "import_credentials" {
+# 	triggers = {
+# 		github_oauth_token = var.git_token
+# 	}
+# 	provisioner "local-exec" {
+# 		command = <<EOF
+# 		 aws --region eu-central-1 codebuild import-source-credentials \
+#                                                              --token ${var.git_token} \
+#                                                              --server-type GITHUB \
+#                                                              --auth-type PERSONAL_ACCESS_TOKEN
+# EOF
+# 	}
+# }
+
+# #add credentials for github
+resource "aws_codebuild_source_credential" "github_token" {
+  auth_type = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token = var.git_token
 }
+
+
+
 
 resource "aws_codebuild_project" "best-codebuild-ever" {
 	depends_on = [
-		null_resource.import_credentials
+		aws_codebuild_source_credential.github_token
 	]
-	name = "golden-paper"
+	name = "silver-paper"
 	description = "bla bla bla again"
 	build_timeout = "10"
 	service_role = aws_iam_role.codebuild-role.arn
@@ -42,7 +53,7 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
 	}
 	environment {
 		compute_type = "BUILD_GENERAL1_SMALL"
-		image = "aws/codebuild/standard:5.0"
+		image = "aws/codebuild/standard:4.0"
 		type = "LINUX_CONTAINER"
 		image_pull_credentials_type = "CODEBUILD"
 		privileged_mode = true
@@ -66,7 +77,8 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
 	}
 
 	source {
-		buildspec = "./buildspec.yml"
+		buildspec = "hide_buildspec.yml"
+					#  hide_buildspec.yml
 		type = "GITHUB"
 		location = "https://github.com/extsand/blue_app"
 		git_clone_depth = 1
@@ -80,10 +92,13 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
 
 	vpc_config {
 		vpc_id = aws_vpc.codebuild_vpc.id
-		subnets = [ 
-			aws_subnet.public_a.id,
-			aws_subnet.public_b.id
-		]
+		# subnets = [ 
+		# 	aws_subnet.private.*.id
+		# 	# aws_subnet.public_a.id,
+		# 	# aws_subnet.public_b.id
+		# ]
+		subnets = aws_subnet.private.*.id
+
 		security_group_ids = [
 			aws_security_group.security_for_codebuild.id
 		]

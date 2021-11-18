@@ -1,4 +1,6 @@
-data "aws_availability_zones" "available" {}
+data "aws_availability_zones" "available" {
+
+}
 locals {
 	az_count = 2
 }
@@ -35,22 +37,22 @@ resource "aws_route_table" "route_igw" {
 resource "aws_subnet" "public" {
 	count = local.az_count
 	vpc_id = aws_vpc.codebuild_vpc.id
-	cidr_block = "10.0.1${count}.0/24"
-	availability_zone = data.aws_availability_zones.available
+	cidr_block = "10.0.1${count.index}.0/24"
+	availability_zone = data.aws_availability_zones.available.names[count.index]
 	map_public_ip_on_launch = true
 	tags = {
-		Name = "Public subnet ${count}"
+		Name = "Public subnet ${count.index}"
 	}
 }
 
 resource "aws_subnet" "private" {
 	count = local.az_count
 	vpc_id = aws_vpc.codebuild_vpc.id
-	cidr_block = "10.0.2${count}.0/24"
-	availability_zone = data.aws_availability_zones.available
+	cidr_block = "10.0.2${count.index}.0/24"
+	availability_zone = data.aws_availability_zones.available.names[count.index]
 	map_public_ip_on_launch = false
 	tags = {
-		Name = "Private subnet ${count}"
+		Name = "Private subnet ${count.index}"
 	}
 }
 

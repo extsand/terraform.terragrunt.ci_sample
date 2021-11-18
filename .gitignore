@@ -17,7 +17,7 @@ terraform.tfstate.backup
 .terragrunt-cache/
 .terragrunt-cache
 .secrets
-
+export_var.sh
 
 
 

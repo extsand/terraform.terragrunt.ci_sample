@@ -21,7 +21,7 @@ locals {
 	app_name = "academy-app"
 	app_port = "80"
 	app_count = 1
-	image_tag = "0.99"
+	image_tag = "init"
 	build_app_command = "make build-app APP_NAME=${local.app_name} ENV_NAME=${local.env} APP_TAG=${local.image_tag}"
 	
 
