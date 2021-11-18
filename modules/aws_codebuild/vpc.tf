@@ -1,3 +1,9 @@
+data "aws_availability_zones" "available" {}
+locals {
+	az_count = 2
+}
+
+
 resource "aws_vpc" "codebuild_vpc" {
 	cidr_block = "10.0.0.0/16"
 	instance_tenancy = "default"
@@ -14,7 +20,7 @@ resource "aws_internet_gateway" "vpc_igw" {
 		Name = "Codebuild-VPC"
 	}
 }
-resource "aws_route_table" "route_for_vpc_codebuild-to-igw" {
+resource "aws_route_table" "route_igw" {
 	vpc_id = aws_vpc.codebuild_vpc.id
 	route {
 		cidr_block = "0.0.0.0/0"
@@ -26,37 +32,59 @@ resource "aws_route_table" "route_for_vpc_codebuild-to-igw" {
 	
 }
 
-resource "aws_subnet" "public_a" {
-	availability_zone = "eu-central-1a"
+resource "aws_subnet" "public" {
+	count = local.az_count
 	vpc_id = aws_vpc.codebuild_vpc.id
-	cidr_block = "10.0.10.0/24"
+	cidr_block = "10.0.1${count}.0/24"
+	availability_zone = data.aws_availability_zones.available
 	map_public_ip_on_launch = true
 	tags = {
-		Name = "Public subnet A"
+		Name = "Public subnet ${count}"
 	}
 }
 
-
-resource "aws_subnet" "public_b" {
-	availability_zone = "eu-central-1b"
+resource "aws_subnet" "private" {
+	count = local.az_count
 	vpc_id = aws_vpc.codebuild_vpc.id
-	cidr_block = "10.0.20.0/24"
-	map_public_ip_on_launch = true
+	cidr_block = "10.0.2${count}.0/24"
+	availability_zone = data.aws_availability_zones.available
+	map_public_ip_on_launch = false
 	tags = {
-		Name = "Public subnet b"
+		Name = "Private subnet ${count}"
 	}
 }
+
 
 resource "aws_route_table_association" "rta_public_a" {
-	subnet_id = aws_subnet.public_a.id
-	route_table_id = aws_route_table.route_for_vpc_codebuild-to-igw.id
-}
-resource "aws_route_table_association" "rta_public_b" {
-	subnet_id = aws_subnet.public_b.id
-	route_table_id = aws_route_table.route_for_vpc_codebuild-to-igw.id
+	count = local.az_count
+	subnet_id = element(aws_subnet.public.*.id, count.index)
+	route_table_id = aws_route_table.route_igw.id
 }
 
 
 
-
-
+resource "aws_eip" "eip_for_nat" {
+	count = local.az_count
+	vpc = true
+	depends_on = [
+		aws_internet_gateway.vpc_igw
+	]
+}
+resource "aws_nat_gateway" "nat_for_private" {
+	count = local.az_count
+	allocation_id = element(aws_eip.eip_for_nat.*.id, count.index)
+	subnet_id = element(aws_subnet.public.*.id, count.index)
+}
+resource "aws_route_table" "route_private_nat" {
+	count = local.az_count
+	vpc_id = aws_vpc.codebuild_vpc.id
+	route {
+		cidr_block = "0.0.0.0/0"
+		nat_gateway_id = element(aws_nat_gateway.nat_for_private.*.id, count.index)
+	}
+}
+resource "aws_route_table_association" "rta_nat" {
+	count = local.az_count
+	subnet_id = element(aws_subnet.private.*.id, count.index)
+	route_table_id = element(aws_route_table.route_private_nat.*.id, count.index)
+}
