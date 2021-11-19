@@ -1,6 +1,6 @@
 locals {
   account_id = "530117518858"
-  region = "eu-central-1"
+  region     = "eu-central-1"
 }
 
 
@@ -22,8 +22,8 @@ EOF
 }
 
 data "template_file" "template-for-codebuild-role-policy" {
-  template = <<POLICY
-  {
+  template = <<EOF
+{
   "Version": "2012-10-17",
   "Statement": [
     {
@@ -161,9 +161,6 @@ data "template_file" "template-for-codebuild-role-policy" {
         }
       }
     },
-
-
-
     {
       "Effect": "Allow",
       "Action": [
@@ -286,7 +283,6 @@ data "template_file" "template-for-codebuild-role-policy" {
           "*"
       ]
     },
-
     {
       "Effect": "Allow",
       "Action": [
@@ -371,8 +367,7 @@ data "template_file" "template-for-codebuild-role-policy" {
           }
       }
     }
-
   ]
 }
-POLICY
+EOF
 }
