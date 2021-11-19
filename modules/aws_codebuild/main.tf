@@ -106,10 +106,6 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
   tags = {
     Environment = "Test test test"
   }
-
-
-
-
 }
 
 
