@@ -1,3 +1,5 @@
+#Examole of buildspec
+# more https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
 version: 0.2
 
 env:
