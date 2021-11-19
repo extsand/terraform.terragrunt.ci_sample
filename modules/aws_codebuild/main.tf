@@ -77,8 +77,8 @@ resource "aws_codebuild_project" "best-codebuild-ever" {
   }
 
   source {
+    #main from github
     buildspec = "hide_buildspec.yml"
-    #  hide_buildspec.yml
     type                = "GITHUB"
     location            = "https://github.com/extsand/blue_app"
     git_clone_depth     = 1
