@@ -1,15 +1,15 @@
 resource "aws_codebuild_webhook" "git_webhook" {
-    project_name = aws_codebuild_project.best-codebuild-ever.name
+    project_name = aws_codebuild_project.codebuild.name
     filter_group {
       
       filter {
         type = "EVENT"
-        pattern = "PUSH"
+        pattern = var.git_trigger_event
       }
 
       filter{
           type = "HEAD_REF"
-          pattern = "^refs/heads/main$"
+          pattern = var.branch_pattern
       }
     
     }   

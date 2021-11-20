@@ -25,9 +25,9 @@ locals {
 	build_app_command = "make build-app APP_NAME=${local.app_name} ENV_NAME=${local.env} APP_TAG=${local.image_tag}"
 	
 
-  	#repo settings
-	repo_url = "https://git......."
-	repo_branch = "dev"
+	#repo settings
+	repo_url = "git@github.com:extsand/terraform.terragrunt.ci_sample.git"
+	repo_branch = "dev-fargate"
 	branch_pattern = "^refs/heads/${local.repo_branch}$"
 	git_trigger_event = "PUSH"
 

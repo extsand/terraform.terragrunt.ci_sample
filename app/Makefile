@@ -46,7 +46,7 @@ build-app:
 # - for more about - read AWS CLI info
 .PHONY:aws-ecr-login 
 aws-ecr-login: 
-	aws ecr get-login-password --region=$(AWS_REPOSITORY_REGION) --profile $(AWS_PROFILE) | docker login --username AWS --password-stdin $(AWS_REGISTRY_ID).dkr.ecr.$(AWS_REPOSITORY_REGION).amazonaws.com
+	aws ecr get-login-password --region=$(AWS_REPOSITORY_REGION) | docker login --username AWS --password-stdin $(AWS_REGISTRY_ID).dkr.ecr.$(AWS_REPOSITORY_REGION).amazonaws.com
 
 .PHONY:debug-mode
 debug-mode:
