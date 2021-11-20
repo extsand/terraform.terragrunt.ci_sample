@@ -67,6 +67,7 @@ resource "aws_codebuild_project" "codebuild" {
     # 	# aws_subnet.public_b.id
     # ]
     # subnets = aws_subnet.private.*.id
+    
 		subnets = var.private-subnets
 
     security_group_ids = [

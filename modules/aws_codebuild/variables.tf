@@ -62,3 +62,7 @@ variable "project_tags" {
 locals {
 	name_generator = "${var.app_name}-${var.environment}"
 }
+
+# variable "buffer-value" {
+  
+# }

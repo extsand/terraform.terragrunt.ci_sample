@@ -7,6 +7,10 @@ output "vpc_tags" {
 }
 
 
+output "subnets-private-id" {
+	value = aws_subnet.private.*.id
+}
+
 
 output "app-private-subnet" {
 	value = aws_subnet.private.*.cidr_block
