@@ -26,7 +26,7 @@ locals {
 	
 
 	#repo settings
-	repo_url = "git@github.com:extsand/terraform.terragrunt.ci_sample.git"
+	repo_url = "https://github.com/extsand/terraform.terragrunt.ci_sample.git.git"
 	repo_branch = "dev-fargate"
 	branch_pattern = "^refs/heads/${local.repo_branch}$"
 	git_trigger_event = "PUSH"

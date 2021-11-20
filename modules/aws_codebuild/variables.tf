@@ -42,9 +42,11 @@ variable "buildspec" {
 
 variable "vpc-cluster-id" {
 	type = string
+	default = null
 }
 variable "private-subnets" {
-	type = map
+	type = list
+
 }
 
 

@@ -4,6 +4,8 @@
 *.terragrunt-cache/
 *.terragrunt-cache
 *.secrets
+*.tfvars.json
+terragrunt-debug.tfvars.json
 
 .terraform
 .terraform.lock.hcl

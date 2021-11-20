@@ -17,17 +17,19 @@ dependencies {
 
 dependency "aws_cluster_fargate"{
 	config_path = "../aws_cluster_fargate"
-	mock_outputs = {
-		vpc-cluster-id = "vpc-000000000000"
-		subnets = ["private-subnet-0000000", "private-subnet-0000001" ]
-	}
+	# mock_outputs = {
+	# 	vpc-cluster = "vpc-000000000000"
+	# 	subnets = ["app-private-subnet-0000000", "app-private-subnet-0000001" ]
+	# }
 }
 
-inputs = {
+inputs = merge(
+	{
 	# ecr_repository_url = dependency.aws_ecr.outputs.ecr_repository_url
-	vpc-cluster-id = dependency.aws_cluster_fargate.outputs.vpc-cluster-id
-	private-subnets = dependency.aws_cluster_fargate.outputs.subnets
-}
+		vpc-cluster-id = dependency.aws_cluster_fargate.outputs.vpc_id
+		private-subnets = dependency.aws_cluster_fargate.outputs.app-private-subnet
+	}
+)
 
 
 
