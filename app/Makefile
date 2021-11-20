@@ -13,7 +13,7 @@
 APP_NAME ?= academy-app
 ENV_NAME ?= dev
 APP_TAG ?= init
-APP_IMAGE = $(AWS_REPOSITORY_NAME):$(APP_TAG)
+APP_IMAGE = $(AWS_REPOSITORY_NAME):git_commit-$(APP_TAG)
 
 #aws variables 
 AWS_REGISTRY_ID ?= 530117518858

@@ -36,6 +36,8 @@ phases:
     - echo Manual build-method
     - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
     - ls -la
+    - cd app
+    - ls -la
     - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 
   # post_build:
