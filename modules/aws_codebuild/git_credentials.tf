@@ -1,3 +1,11 @@
+# #add credentials for github
+resource "aws_codebuild_source_credential" "github_token" {
+  auth_type   = "PERSONAL_ACCESS_TOKEN"
+  server_type = "GITHUB"
+  token       = var.git_token
+}
+
+
 # # ======== Manual version
 # resource "null_resource" "import_credentials" {
 # 	triggers = {
@@ -13,9 +21,3 @@
 # 	}
 # }
 
-# #add credentials for github
-resource "aws_codebuild_source_credential" "github_token" {
-  auth_type   = "PERSONAL_ACCESS_TOKEN"
-  server_type = "GITHUB"
-  token       = var.git_token
-}
