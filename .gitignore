@@ -18,7 +18,7 @@ terraform.tfstate.backup
 .terragrunt-cache
 .secrets
 export_var.sh
-
+add_git_token.sh
 
 
 

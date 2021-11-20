@@ -31,6 +31,8 @@ locals {
 	branch_pattern = "^refs/heads/${local.repo_branch}$"
 	git_trigger_event = "PUSH"
 
+	buildspec = "buildspec.yml"
+
 
 	#project tags
 	project_tags = {
@@ -68,6 +70,7 @@ inputs = {
 	branch_pattern = local.branch_pattern
 	git_trigger_event = local.git_trigger_event
 
+	buildspec = local.buildspec
 
 	project_tags = local.project_tags
 

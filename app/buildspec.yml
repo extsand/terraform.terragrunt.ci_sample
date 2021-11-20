@@ -1,13 +1,14 @@
-#Examole of buildspec
-# more https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
+# more about
+# https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
 version: 0.2
 
 env:
   variables:
-    NAME: "Golden stone"
+    NAME: "blue-app"
     ENV: "developer-mode"
-    VERSION: "${CODEBUILD_RESOLVED_SOURCE_VERSION}"
+    VERSION_FROM_GIT: "${CODEBUILD_RESOLVED_SOURCE_VERSION}"
     DIR: "${CODEBUILD_SRC_DIR}"
+
 
 phases:
   # pre_build:
@@ -22,23 +23,25 @@ phases:
   #   finally: echo "I'm always run. Even if jobs was falls "
 
   # install:
-  #   commands:
+    # commands:
+      # - apt-get install tree
   #   # some....
   #   - echo "Install environment"
   #   - echo "go to next step"
 
   build:
     commands:
-
-    - echo 'Codebuild was created by Terraform___)))'
     # some....
-    # - echo Build with git hooks
-    # - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
-    # - echo "Build application"
-    # - echo "go to next step"
+    - echo Build with git hooks
+    - echo Manual build-method
+    - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+    - ls -la
+    - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
 
   # post_build:
   #   commands:
   #   # some...
   #   - echo "Send info messages"
   #   - echo "finish"
+
+  
