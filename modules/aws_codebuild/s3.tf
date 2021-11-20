@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "codebuild_bucket" {
-  bucket = "for-codebuild"
+  bucket = "${local.name_generator}-codebuild-bucket"
   acl    = "private"
 	#create version of file
 	versioning {
@@ -12,6 +12,6 @@ resource "aws_s3_bucket" "codebuild_bucket" {
 	
 	#possibility for destroying S3 with file inside
 	force_destroy = true
-	tags = merge(var.project_tags, {Name = "Best-bucker-ever"})
+	tags = merge(var.project_tags, {Name = "${local.name_generator}-codebuild-bucket"})
 
 }
