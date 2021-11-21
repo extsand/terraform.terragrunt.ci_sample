@@ -1,6 +1,6 @@
 resource "aws_security_group" "security_for_codebuild" {
   name   = "Security for Codebuild"
-  vpc_id = var.vpc-cluster-id
+  vpc_id = var.vpc_cluster_id
   # vpc_id = aws_vpc.codebuild_vpc.id
 
   ingress {

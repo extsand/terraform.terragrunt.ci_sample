@@ -59,7 +59,9 @@ resource "aws_codebuild_project" "codebuild" {
 
 
   vpc_config {
-		vpc_id = var.vpc-cluster-id
+		vpc_id = var.vpc_cluster_id
+
+
     # vpc_id = aws_vpc.codebuild_vpc.id
     # subnets = [ 
     # 	aws_subnet.private.*.id
@@ -67,8 +69,12 @@ resource "aws_codebuild_project" "codebuild" {
     # 	# aws_subnet.public_b.id
     # ]
     # subnets = aws_subnet.private.*.id
-    
-		subnets = var.private-subnets
+
+    #IMPORTATN 
+    ## codebuild required private-subnet.id.
+    ## for terragrunt we should create output value in aws cluster 
+    ## with private-subnet.id and grab data for codebuild variable
+		subnets = var.private_subnets
 
     security_group_ids = [
       aws_security_group.security_for_codebuild.id

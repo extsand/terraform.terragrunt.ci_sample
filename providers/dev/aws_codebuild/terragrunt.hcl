@@ -18,19 +18,17 @@ dependencies {
 dependency "aws_cluster_fargate"{
 	config_path = "../aws_cluster_fargate"
 	mock_outputs = {
-		subnets-private-id = ["subnet-0000000000000000", "subnet-0000000000000001"]
+		#grab data from aws_cluster_outputs
+		vpc_id = "vpc-0000"
+		subnets-private-id = ["subnet-0000", "subnet-0001"]
 	}
-	# mock_outputs = {
-	# 	vpc-cluster = "vpc-000000000000"
-	# 	subnets = ["app-private-subnet-0000000", "app-private-subnet-0000001" ]
 
-	# }
 }
 
 inputs = {
-	# ecr_repository_url = dependency.aws_ecr.outputs.ecr_repository_url
-		vpc-cluster-id = dependency.aws_cluster_fargate.outputs.vpc_id
-		private-subnets = dependency.aws_cluster_fargate.outputs.subnets-private-id
+		vpc_cluster_id = dependency.aws_cluster_fargate.outputs.vpc_id
+		private_subnets = dependency.aws_cluster_fargate.outputs.subnets-private-id
+		# for debug mode
 		# buffer-value = dependency.aws_cluster_fargate.outputs.subnets-private-id
 	}
 

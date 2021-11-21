@@ -40,11 +40,11 @@ variable "buildspec" {
 	type = string
 }
 
-variable "vpc-cluster-id" {
+variable "vpc_cluster_id" {
 	type = string
 	default = null
 }
-variable "private-subnets" {
+variable "private_subnets" {
 	type = list
 
 }

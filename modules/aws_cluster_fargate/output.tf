@@ -1,16 +1,16 @@
-
+#important for codebuild
 output "vpc_id" {
 	value = aws_vpc.vpc_cluster.id
 }
-output "vpc_tags" {
-	value = aws_vpc.vpc_cluster.tags_all
-}
-
-
 output "subnets-private-id" {
 	value = aws_subnet.private.*.id
 }
+# important end
 
+
+output "vpc_tags" {
+	value = aws_vpc.vpc_cluster.tags_all
+}
 
 output "app-private-subnet" {
 	value = aws_subnet.private.*.cidr_block
