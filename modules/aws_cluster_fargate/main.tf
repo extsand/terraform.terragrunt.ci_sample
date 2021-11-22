@@ -64,6 +64,7 @@ resource "aws_ecs_task_definition" "app_task_definition" {
 data "template_file" "app_template" {
   template = file(var.task_definition_template)
 
+
   vars = {
 	aws_region     = var.aws_region
     env            = var.environment
