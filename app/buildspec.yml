@@ -19,20 +19,20 @@ env:
 phases:
   install:
     commands:
-      - echo "Install environment"
+      # - echo "Install environment"
       # INSTALL JQ
       # INSTALL TERRAFORM
       # INSTALL TERRAGRUNT
-      - apt-get install jq
-      - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_386.zip -O terraform.zip --no-verbose
-      - unzip terraform.zip
-      - chmod u+x terraform
-      - mv terraform /usr/local/bin/
-      - rm -rf terraform.zip
-      - wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt --no-verbose
+      # - apt-get install jq
+      # - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_386.zip -O terraform.zip --no-verbose
+      # - unzip terraform.zip
+      # - chmod u+x terraform
+      # - mv terraform /usr/local/bin/
+      # - rm -rf terraform.zip
+      # - wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt --no-verbose
 
-      - chmod u+x terragrunt
-      - mv terragrunt /usr/local/bin/ 
+      # - chmod u+x terragrunt
+      # - mv terragrunt /usr/local/bin/ 
     finally:
       - jq --version
       - terraform -version
@@ -41,27 +41,28 @@ phases:
   pre_build:
     commands:
       # SET ENV_VAR for project
-      - export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.UserId' | cut -d ':' -f 1`
-      - export AWS_REPOSITORY_NAME=`${AWS_REGISTRY_ID}.dkr.ecr.${AWS_REPOSITORY_REGION}.amazonaws.com/${APP_NAME}-${ENV_NAME}`
-      - export AWS_APP_TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV_NAME}"
-      - env | grep "AWS"
+      - aws sts get-caller-identity 
+      # - export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.UserId' | cut -d ':' -f 1`
+      # - export AWS_REPOSITORY_NAME=`${AWS_REGISTRY_ID}.dkr.ecr.${AWS_REPOSITORY_REGION}.amazonaws.com/${APP_NAME}-${ENV_NAME}`
+      # - export AWS_APP_TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV_NAME}"
+      # - env | grep "AWS"
   
   build:
     commands:
       - echo Build with git hooks
       # - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
-      - ls -la
-      - cd app
-      - ls -la
-      - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
-      - cd ${CODEBUILD_SRC_DIR}  
-      - terragrunt plan --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER}  -var="image_tag=${AWS_APP_TAG}"
-      - terragrunt apply --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER} -var="image_tag=${AWS_APP_TAG}"
+      # - ls -la
+      # - cd app
+      # - ls -la
+      # - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      # - cd ${CODEBUILD_SRC_DIR}  
+      # - terragrunt plan --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER}  -var="image_tag=${AWS_APP_TAG}"
+      # - terragrunt apply --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER} -var="image_tag=${AWS_APP_TAG}"
       
   post_build:
     commands:
-      - echo Application avaliable
-      - aws elbv2 describe-load-balancers | jq -r '.LoadBalancers[].DNSName' 
+      # - echo Application avaliable
+      # - aws elbv2 describe-load-balancers | jq -r '.LoadBalancers[].DNSName' 
   # post_build:
   #   commands:
   #   # some...
