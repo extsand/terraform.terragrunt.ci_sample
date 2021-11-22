@@ -16,4 +16,6 @@ resource "aws_security_group" "security_for_codebuild" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  tags = merge(var.project_tags, { Name = "Codebuild_SG-${local.name_generator}" })
 }
