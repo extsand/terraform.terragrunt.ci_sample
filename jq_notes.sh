@@ -30,4 +30,5 @@ export AWS_REPOSITORY_NAME=`$(AWS_REGISTRY_ID).dkr.ecr.$(AWS_REPOSITORY_REGION).
 
 env | grep "AWS"
 
+#cut data before ":"
 echo 'AROAXW3LXMYFGSAPEGR27:AWSCodeBuild-9961599b-ed85-41dd-85e2-8bc67bfb5469' | cut -d ':' -f 1
