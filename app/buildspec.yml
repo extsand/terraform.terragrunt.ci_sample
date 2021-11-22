@@ -5,7 +5,7 @@ version: 0.2
 env:
   variables:
     APP_NAME: "academy-app" 
-    ENV_NAME: "developer-mode"
+    ENV_NAME: "dev"
     # APP_TAG: "latest"
     AWS_REPOSITORY_REGION: "eu-central-1"
 
@@ -40,7 +40,7 @@ phases:
   pre_build:
     commands:
       # SET ENV_VAR for project
-      - aws sts get-caller-identity 
+      # - aws sts get-caller-identity 
       - export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.Account'`
       - export AWS_REPOSITORY_NAME=`${AWS_REGISTRY_ID}.dkr.ecr.${AWS_REPOSITORY_REGION}.amazonaws.com/${APP_NAME}-${ENV_NAME}`
       - export AWS_APP_TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV_NAME}"
