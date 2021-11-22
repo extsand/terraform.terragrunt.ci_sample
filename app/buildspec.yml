@@ -23,12 +23,13 @@ phases:
       # INSTALL TERRAFORM
       # INSTALL TERRAGRUNT
       - apt-get install jq
-      - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_386.zip -O terraform.zip
+      - wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_386.zip -O terraform.zip --no-verbose
       - unzip terraform.zip
       - chmod u+x terraform
       - mv terraform /usr/local/bin/
       - rm -rf terraform.zip
-      - wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt
+      - wget https://github.com/gruntwork-io/terragrunt/releases/download/v${TERRAGRUNT_VERSION}/terragrunt_linux_amd64 -O terragrunt --no-verbose
+
       - chmod u+x terragrunt
       - mv terragrunt /usr/local/bin/ 
     finally:
@@ -40,7 +41,7 @@ phases:
     commands:
       # SET ENV_VAR for project
       - export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.UserId'`
-      - export AWS_REPOSITORY_NAME=`$(AWS_REGISTRY_ID).dkr.ecr.$(AWS_REPOSITORY_REGION).amazonaws.com/$(APP_NAME)-$(ENV_NAME)`
+      - export AWS_REPOSITORY_NAME=`${AWS_REGISTRY_ID}.dkr.ecr.${AWS_REPOSITORY_REGION}.amazonaws.com/${APP_NAME}-${ENV_NAME}`
       - export AWS_APP_TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV_NAME}"
       - env | grep "AWS"
   
