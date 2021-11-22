@@ -55,8 +55,8 @@ phases:
       - ls -la
       - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - cd ${CODEBUILD_SRC_DIR}  
-      - terragrunt plan --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER}  -var="app_tag=${AWS_APP_TAG}"
-      - terragrunt apply --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER} -var="app_tag=${AWS_APP_TAG}"
+      - terragrunt plan --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER}  -var="app_tag=${AWS_APP_TAG}" 
+      - terragrunt apply --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER} -var="app_tag=${AWS_APP_TAG}" -auto-approve 
       
   post_build:
     commands:
