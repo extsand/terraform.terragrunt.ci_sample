@@ -4,7 +4,7 @@ version: 0.2
 
 env:
   variables:
-    APP_NAME: "blue-app" 
+    APP_NAME: "academy-app" 
     ENV_NAME: "developer-mode"
     # APP_TAG: "latest"
 
