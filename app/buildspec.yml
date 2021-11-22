@@ -40,7 +40,7 @@ phases:
   pre_build:
     commands:
       # SET ENV_VAR for project
-      - export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.UserId'`
+      - export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.UserId' | cut -d ':' -f 1`
       - export AWS_REPOSITORY_NAME=`${AWS_REGISTRY_ID}.dkr.ecr.${AWS_REPOSITORY_REGION}.amazonaws.com/${APP_NAME}-${ENV_NAME}`
       - export AWS_APP_TAG="${CODEBUILD_RESOLVED_SOURCE_VERSION}-${ENV_NAME}"
       - env | grep "AWS"
