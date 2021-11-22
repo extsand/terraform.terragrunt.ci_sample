@@ -47,17 +47,21 @@ phases:
   
   build:
     commands:
-    - echo Build with git hooks
-    - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
-    - ls -la
-    - cd app
-    - ls -la
-    - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
-    - cd ${CODEBUILD_SRC_DIR}  
-    - terragrunt plan --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER}  -var="image_tag=${AWS_APP_TAG}"
-    - terragrunt apply --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER} -var="image_tag=${AWS_APP_TAG}"
-    
-
+      - env | grep "AWS"
+      - echo Build with git hooks
+      - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - ls -la
+      - cd app
+      - ls -la
+      - make build-app APP_TAG=${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      - cd ${CODEBUILD_SRC_DIR}  
+      - terragrunt plan --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER}  -var="image_tag=${AWS_APP_TAG}"
+      - terragrunt apply --terragrunt-working-dir ${WORKDIR_TERRAGRUNT_CLUSTER} -var="image_tag=${AWS_APP_TAG}"
+      
+  post_build:
+    commands:
+      - echo Application avaliable
+      - aws elbv2 describe-load-balancers | jq -r '.LoadBalancers[].DNSName' 
   # post_build:
   #   commands:
   #   # some...

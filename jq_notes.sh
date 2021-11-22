@@ -21,6 +21,9 @@ aws sts get-caller-identity | jq
 aws sts get-caller-identity | jq -r '.UserId'
 aws sts get-caller-identity | jq -r '.Account'
 
+aws elbv2 describe-load-balancers | jq -r '.DNSName'
+aws elbv2 describe-load-balancers | jq -r '.LoadBalancers[].DNSName'
+
 
 export AWS_REGISTRY_ID=`aws sts get-caller-identity | jq -r '.UserId'`
 export AWS_REPOSITORY_NAME=`$(AWS_REGISTRY_ID).dkr.ecr.$(AWS_REPOSITORY_REGION).amazonaws.com/$(APP_NAME)-$(ENV_NAME)`
