@@ -48,9 +48,8 @@ phases:
   
   build:
     commands:
-      - env | grep "AWS"
       - echo Build with git hooks
-      - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
+      # - echo git commit is - ${CODEBUILD_RESOLVED_SOURCE_VERSION}
       - ls -la
       - cd app
       - ls -la

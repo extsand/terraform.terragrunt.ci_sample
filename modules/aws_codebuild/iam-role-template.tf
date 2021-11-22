@@ -1,6 +1,13 @@
+data "aws_caller_identity" "current_identity" {}
+data "aws_region" "current_region" {}
+
+
 locals {
-  account_id = "530117518858"
-  region     = "eu-central-1"
+  # account_id = "530117518858"
+  # region     = "eu-central-1"
+
+  account_id = data.aws_caller_identity.current_identity.account_id
+  region = data.aws_region.current_region.name
 }
 
 

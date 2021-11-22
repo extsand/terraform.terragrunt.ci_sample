@@ -1,10 +1,10 @@
 resource "aws_iam_role" "codebuild-role" {
-  name               = "role-for-codebuild"
+  name               = "role-for-codebuild-${locals.name_generator}"
   assume_role_policy = data.template_file.template-codebuild-role.rendered
 }
 
 resource "aws_iam_role_policy" "codebuild-role-attachment" {
-  name   = "policy-for-codebuild"
+  name   = "policy-for-codebuild-${locals.name_generator}"
   role   = aws_iam_role.codebuild-role.name
   policy = data.template_file.template-for-codebuild-role-policy.rendered
 
