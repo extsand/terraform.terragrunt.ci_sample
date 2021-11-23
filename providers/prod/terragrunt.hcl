@@ -10,7 +10,7 @@ locals {
 	#aws account
 	aws_profile = "academy"
 	aws_account = "530117518858"
-	aws_region = "eu-west-3"
+	aws_region = "eu-west-1"
 	aws_az_count = "2"
 	
 	#aws bucket
