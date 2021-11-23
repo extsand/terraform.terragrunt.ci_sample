@@ -31,7 +31,7 @@ locals {
 	branch_pattern = "^refs/heads/${local.repo_branch}$"
 	git_trigger_event = "PUSH"
 
-	buildspec = "./app/buildspec.yml"
+	buildspec = "./buildspec.yml"
 	# app/buildspec.yml
 
 

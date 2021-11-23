@@ -62,10 +62,5 @@ phases:
     commands:
       - echo Application avaliable
       - aws elbv2 describe-load-balancers | jq -r '.LoadBalancers[].DNSName' 
-  # post_build:
-  #   commands:
-  #   # some...
-  #   - echo "Send info messages"
-  #   - echo "finish"
-
+    
   
