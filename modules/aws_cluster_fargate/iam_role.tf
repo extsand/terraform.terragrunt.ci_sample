@@ -26,8 +26,6 @@ resource "aws_iam_role" "ecs_task_execution_role" {
 }
 
 #ECS task execution role policy attachment
-# Settings for IAM Task Definition role
-#NOT SURE ABOUT IT????
 #====================================================
 resource "aws_iam_role_policy" "ecs_task_execution_role" {
 	name_prefix = "ecs_iam_role_policy"
@@ -83,22 +81,6 @@ EOF
 
 
 data "template_file" "ecs_service_policy_template_file" {
-  # Allow logs for cloudwatch
-  # Allow ecs & ecr access as per
-  # https://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html
-  #
-  # Allow ec2 describe instances so that the instance can see its own metadata if needed
-  #
-  # Allow param store access only to the namespace of this cluster
-  # You can/should create even more granular param access depending
-  # on the additional services you run in this cluster.
-  #
-  # Please read:
-  # https://aws.amazon.com/blogs/mt/the-right-way-to-store-secrets-using-parameter-store/
-  # for additional steps you can take to impart least permissions with ECS.
-  #
-  # Note: Once you have created a Key Manage Service (KMS) key for this ECS service,
-  # kms access should be limited to that KMS key.
   template = <<EOF
 {
   "Version": "2012-10-17",

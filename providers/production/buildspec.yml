@@ -5,7 +5,7 @@ version: 0.2
 env:
   variables:
     APP_NAME: "academy-app" 
-    ENV_NAME: "production"
+    ENV_NAME: "prod"
     # APP_TAG: "latest"
     AWS_REPOSITORY_REGION: "eu-west-3"
 

@@ -15,7 +15,7 @@ locals {
 	
 	#aws bucket
 	remote_state_bucket_prefix = "terraform"
-	env = "production"	
+	env = "prod"	
 	
 	#app settings
 	app_name = "academy-app"
