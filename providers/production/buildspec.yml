@@ -7,7 +7,7 @@ env:
     APP_NAME: "academy-app" 
     ENV_NAME: "production"
     # APP_TAG: "latest"
-    AWS_REPOSITORY_REGION: "eu-central-1"
+    AWS_REPOSITORY_REGION: "us-east-1"
 
     VERSION_FROM_GIT: "${CODEBUILD_RESOLVED_SOURCE_VERSION}"
     DIR: "${CODEBUILD_SRC_DIR}"

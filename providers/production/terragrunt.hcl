@@ -8,7 +8,7 @@
 
 locals {
 	#aws account
-	aws_profile = "academy-production"
+	aws_profile = "academy"
 	aws_account = "530117518858"
 	aws_region = "us-east-1"
 	aws_az_count = "2"

@@ -1,6 +1,10 @@
 #!/bin/bash
 # get info about aws profile
 aws sts get-caller-identity
+aws configure list [--profile profile-name]
+
+aws configure list
+aws sts get-caller-identity
 
 CLUSTER_NAME="some"
 SERVICE_ARN="arn"
